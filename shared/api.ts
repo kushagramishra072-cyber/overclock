@@ -108,51 +108,18 @@ export interface ExamTopic {
   completed: boolean;
 }
 
-/* Class Schedule System */
-export type DayOfWeek =
-  | "monday"
-  | "tuesday"
-  | "wednesday"
-  | "thursday"
-  | "friday"
-  | "saturday"
-  | "sunday";
-
-export interface ScheduleClass {
-  id: string;
-  subject: string;
-  day: DayOfWeek;
-  startTime: string; // HH:MM format
-  endTime: string; // HH:MM format
-  room?: string;
-  createdAt: Date;
-}
-
-/* Sleep & Energy Tracking */
-export interface SleepLog {
-  id: string;
-  date: Date;
-  bedtime: string; // HH:MM format
-  wakeTime: string; // HH:MM format
-  durationMinutes: number;
-  createdAt: Date;
-}
-
 /* Dashboard Data */
 export interface DashboardStats {
   overdueTasks: number;
   tasksToday: number;
   nearestExamDaysLeft: number;
   nearestExamSubject?: string;
-  averageSleep: number; // in minutes
-  daysBelow7Hours: number;
   survivalScore: number; // 0-100
 }
 
 export interface SurvivalScoreFactors {
   completionRate: number; // 0-100
   deadlineCompression: number; // 0-100 (higher is worse)
-  sleepConsistency: number; // 0-100
 }
 
 /* Example response type for /api/demo */

@@ -1,7 +1,7 @@
 [build]
   command = "npm run build:client"
   functions = "netlify/functions"
-  publish = "dist"
+  publish = "client/dist"
 
 [functions]
   external_node_modules = ["express"]

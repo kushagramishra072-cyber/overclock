@@ -12,9 +12,25 @@ export default defineConfig({
   },
 
   server: {
-    port: 8080,
+    host: "0.0.0.0",
+    port: 3000,
+    allowedHosts: true,
     fs: {
       allow: ["."]
     }
-  }
+  },
+
+  build: {
+    rollupOptions: {
+      onwarn(warning, defaultHandler) {
+        if (
+          warning.code === "MODULE_LEVEL_DIRECTIVE" ||
+          (warning.message && warning.message.includes('"use client"'))
+        ) {
+          return;
+        }
+        defaultHandler(warning);
+      },
+    },
+  },
 });

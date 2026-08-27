@@ -159,7 +159,25 @@
   input[type="number"],
   textarea,
   select {
-    @apply rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm px-4 py-2.5 text-sm outline-none placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:border-primary/30 transition-all duration-300;
+    @apply rounded-xl border border-white/10 bg-black/80 text-foreground backdrop-blur-sm px-4 py-2.5 text-sm outline-none placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:border-primary/30 transition-all duration-300;
+  }
+
+  select {
+    background-color: #0f0f12 !important;
+    color: #ffffff !important;
+  }
+
+  select option {
+    background-color: #121218 !important;
+    color: #ffffff !important;
+    padding: 8px 12px;
+  }
+
+  select option:hover,
+  select option:focus,
+  select option:checked {
+    background-color: #222230 !important;
+    color: #38bdf8 !important;
   }
 
   :where(p, span, li, h1, h2, h3, h4, h5, h6, a, button, label, td, th) {

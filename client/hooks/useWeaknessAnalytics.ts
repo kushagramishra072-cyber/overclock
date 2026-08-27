@@ -67,7 +67,7 @@ export function useWeaknessAnalytics() {
 
   const analyzePatterns = () => {
     const todaySessions = getTodaySessions();
-    const hours = todaySessions.map((s) => new Date(s.createdAt).getHours());
+    const hours = todaySessions.map((s) => new Date(((s as any).createdAt || s.completedAt || Date.now())).getHours());
     const hourCounts: Record<number, number> = {};
 
     hours.forEach((h) => {

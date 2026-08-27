@@ -1,0 +1,8 @@
+{
+  "name": "Student Survival - Overclock",
+  "description": "Student survival dashboard and focus planner with adaptive study timer, burnout analysis, and exam management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

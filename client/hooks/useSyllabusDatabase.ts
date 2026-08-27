@@ -462,103 +462,38 @@ export const SYLLABUS_DATABASE: Record<string, Board> = {
       },
     ],
   },
-  icse: {
-    "10th": [
-      {
-        name: "Mathematics",
-        chapters: [
-          "Goods and Services Tax",
-          "Banking",
-          "Shares and Dividends",
-          "Linear Inequations",
-          "Quadratic Equations",
-          "Arithmetic and Geometric Progressions",
-          "Coordinate Geometry",
-          "Trigonometric Ratios",
-          "Trigonometric Identities",
-          "Heights and Distances",
-          "Circles",
-          "Tangent and Secant",
-          "Chords and Arcs",
-          "Angle in a Semi-circle",
-          "Cyclic Quadrilaterals",
-          "Construction of Tangents to a Circle",
-          "Mensuration",
-          "Trigonometric Tables",
-          "Probability",
-          "Statistics",
-        ],
-      },
-      {
-        name: "Physics",
-        chapters: [
-          "Force, Work, Power and Energy",
-          "Machines and Mechanical Advantage",
-          "Pressure in Fluids and Atmospheric Pressure",
-          "Refraction of Light",
-          "Spectrum",
-          "Sound",
-          "Electricity and Magnetism",
-          "Calorimetry",
-          "Heat Transfer",
-          "Modern Physics",
-        ],
-      },
-      {
-        name: "Chemistry",
-        chapters: [
-          "The Periodic Table",
-          "Chemical Bonding and Molecular Structure",
-          "Study of Acids, Bases and Salts",
-          "Analytical Chemistry",
-          "Mole Concept and Stoichiometry",
-          "Electrolysis",
-          "Metallurgy",
-          "Study of Compounds - Hydrogen",
-          "Study of Compounds - Oxygen",
-          "Study of Compounds - Non-metals",
-          "Study of Compounds - Metals",
-          "Organic Chemistry",
-        ],
-      },
-      {
-        name: "Biology",
-        chapters: [
-          "Basic Biology",
-          "Cell Biology",
-          "Genetics",
-          "Photosynthesis",
-          "Respiration and Excretion",
-          "Nervous System and Sense Organs",
-          "Endocrine System",
-          "Reproduction in Animals",
-          "Structure and Function of Plants",
-          "Vitamins",
-          "Human Nutrition",
-          "Digestion and Absorption",
-          "The Circulatory System",
-          "Immunity",
-          "Disease and its Control",
-          "Waste Management",
-        ],
-      },
-    ],
-  },
+  icse: {}, // ICSE removed for now
 };
 
 export function useSyllabusDatabase() {
+  // Normalize class grade string (e.g., "9" -> "9th", "Class 10" -> "10th")
+  const normalizeGrade = (classGrade: string): string => {
+    if (!classGrade) return "10th";
+    const cleaned = classGrade.toLowerCase().replace(/[^0-9]/g, "");
+    if (cleaned) {
+      return `${cleaned}th`;
+    }
+    return classGrade.toLowerCase();
+  };
+
   // Get all available boards
   const getBoards = (): string[] => {
-    return Object.keys(SYLLABUS_DATABASE).map((board) => board.toUpperCase());
+    return ["CBSE", "STATE BOARD"];
   };
 
   // Get all available classes for a given board
   const getClasses = (board: string): string[] => {
     const boardKey = board.toLowerCase();
-    if (!SYLLABUS_DATABASE[boardKey]) return [];
-    return Object.keys(SYLLABUS_DATABASE[boardKey]).sort((a, b) => {
-      const aNum = parseInt(a);
-      const bNum = parseInt(b);
+    const boardData = SYLLABUS_DATABASE[boardKey] || SYLLABUS_DATABASE["cbse"];
+    const classes = Object.keys(boardData).filter(key => boardData[key] && boardData[key].length > 0);
+    
+    if (classes.length === 0) {
+      return ["6th", "7th", "8th", "9th", "10th", "11th", "12th"];
+    }
+
+    return classes.sort((a, b) => {
+      const aNum = parseInt(a) || 0;
+      const bNum = parseInt(b) || 0;
       return aNum - bNum;
     });
   };
@@ -566,26 +501,152 @@ export function useSyllabusDatabase() {
   // Get all subjects for a given board and class
   const getSubjects = (board: string, classGrade: string): string[] => {
     const boardKey = board.toLowerCase();
-    const boardData = SYLLABUS_DATABASE[boardKey];
-    if (!boardData) return [];
+    const boardData = SYLLABUS_DATABASE[boardKey] || SYLLABUS_DATABASE["cbse"];
+    const normGrade = normalizeGrade(classGrade);
 
-    const subjects = boardData[classGrade];
-    if (!subjects) return [];
+    const subjects = boardData[normGrade] || boardData[classGrade];
+    if (subjects && subjects.length > 0) {
+      return subjects.map((s) => s.name);
+    }
 
-    return subjects.map((s) => s.name);
+    // Default subjects for any class
+    const gradeNum = parseInt(classGrade) || 10;
+    if (gradeNum >= 11) {
+      return ["Mathematics", "Physics", "Chemistry", "Biology", "English", "Computer Science"];
+    }
+    return ["Mathematics", "Science", "English", "Social Studies", "Computer Science"];
   };
 
   // Get chapters for a given board, class, and subject
   const getChapters = (board: string, classGrade: string, subject: string): string[] => {
+    if (!subject) return [];
+
     const boardKey = board.toLowerCase();
-    const boardData = SYLLABUS_DATABASE[boardKey];
-    if (!boardData) return [];
+    const boardData = SYLLABUS_DATABASE[boardKey] || SYLLABUS_DATABASE["cbse"];
+    const normGrade = normalizeGrade(classGrade);
 
-    const subjects = boardData[classGrade];
-    if (!subjects) return [];
+    const subjects = boardData[normGrade] || boardData[classGrade] || boardData["10th"];
+    if (subjects) {
+      const selectedSubject = subjects.find(
+        (s) => s.name.toLowerCase() === subject.toLowerCase()
+      );
+      if (selectedSubject?.chapters && selectedSubject.chapters.length > 0) {
+        return selectedSubject.chapters;
+      }
+    }
 
-    const selectedSubject = subjects.find((s) => s.name === subject);
-    return selectedSubject?.chapters || [];
+    // Generate realistic standard chapters if subject/grade is non-standard
+    const subLower = subject.toLowerCase();
+    if (subLower.includes("math") || subLower.includes("algeb") || subLower.includes("calcul")) {
+      return [
+        "Number Systems & Real Numbers",
+        "Polynomials & Algebraic Expressions",
+        "Linear & Quadratic Equations",
+        "Coordinate & Euclid Geometry",
+        "Trigonometry & Applications",
+        "Mensuration & Solid Shapes",
+        "Statistics & Data Handling",
+        "Probability & Permutations",
+        "Calculus & Limits",
+        "Vectors & 3D Geometry",
+      ];
+    }
+
+    if (subLower.includes("physic") || subLower.includes("motion") || subLower.includes("light")) {
+      return [
+        "Motion & Kinematics",
+        "Force & Laws of Motion",
+        "Work, Energy & Power",
+        "Gravitation & Satellite Motion",
+        "Properties of Matter & Fluids",
+        "Heat & Thermodynamics",
+        "Sound & Oscillations",
+        "Light Reflection & Refraction",
+        "Electricity & Current Circuits",
+        "Magnetic Effects & Electromagnetic Waves",
+        "Ray & Wave Optics",
+        "Modern Physics & Atoms",
+      ];
+    }
+
+    if (subLower.includes("chem") || subLower.includes("acid") || subLower.includes("reaction")) {
+      return [
+        "Matter in Our Surroundings",
+        "Atoms, Molecules & Mole Concept",
+        "Chemical Reactions & Equations",
+        "Acids, Bases & Salts",
+        "Metals & Non-Metals",
+        "Carbon & Its Compounds",
+        "Periodic Classification of Elements",
+        "Chemical Bonding & Structure",
+        "Thermodynamics & Equilibrium",
+        "Organic Chemistry Basics & Hydrocarbons",
+      ];
+    }
+
+    if (subLower.includes("bio") || subLower.includes("cell") || subLower.includes("life")) {
+      return [
+        "Cell: Structure & Functions",
+        "Tissues & Organ Systems",
+        "Life Processes & Nutrition",
+        "Control & Coordination in Organisms",
+        "How Do Organisms Reproduce",
+        "Heredity & Genetics",
+        "Human Health & Diseases",
+        "Biotechnology Principles",
+        "Ecosystem & Biodiversity",
+        "Environmental Issues & Conservation",
+      ];
+    }
+
+    if (subLower.includes("english") || subLower.includes("lit") || subLower.includes("grammar")) {
+      return [
+        "Reading Comprehension & Passages",
+        "Grammar: Tenses, Voices & Clauses",
+        "Creative Writing & Essay Skills",
+        "Prose & Short Stories Analysis",
+        "Poetry & Literary Devices",
+        "Formal Letter & Report Writing",
+        "Vocabulary, Synonyms & Idioms",
+        "Speech & Article Writing",
+      ];
+    }
+
+    if (subLower.includes("social") || subLower.includes("hist") || subLower.includes("geog") || subLower.includes("civic") || subLower.includes("econ")) {
+      return [
+        "The Rise of Nationalism & Revolutions",
+        "National Movement & Freedom Struggle",
+        "The Making of a Global World",
+        "Resources & Sustainable Development",
+        "Forests, Water & Agriculture",
+        "Political Parties & Democracy",
+        "Judiciary & Executive Powers",
+        "Economic Development & Financial Systems",
+      ];
+    }
+
+    if (subLower.includes("comp") || subLower.includes("code") || subLower.includes("python") || subLower.includes("data") || subLower.includes("it")) {
+      return [
+        "Computer Systems & Architecture",
+        "Programming Fundamentals & Logic",
+        "Data Types, Variables & Expressions",
+        "Control Flow, Loops & Functions",
+        "Data Structures: Lists & Dictionaries",
+        "Database Management & SQL Queries",
+        "Computer Networks & Internet Protocols",
+        "Cyber Safety & Ethics",
+      ];
+    }
+
+    return [
+      `Chapter 1: Foundations & Definitions of ${subject}`,
+      `Chapter 2: Essential Theories & Core Principles`,
+      `Chapter 3: Formulas, Laws & Governing Rules`,
+      `Chapter 4: Step-by-Step Problem Solving`,
+      `Chapter 5: Advanced Applications & Case Studies`,
+      `Chapter 6: High-Yield Exam Practice Questions`,
+      `Chapter 7: Summary Review & Self-Test`,
+    ];
   };
 
   // Search chapters by keyword

@@ -1,23 +1,23 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTasksStore } from "@/hooks/useTasksStore";
 import { useExamsStore } from "@/hooks/useExamsStore";
 import { useTimerStore } from "@/hooks/useTimerStore";
+import FeedbackModal from "@/components/FeedbackModal";
 import {
   Clock,
   BookOpen,
   CheckCircle2,
-  Zap,
-  Calendar,
   TrendingUp,
 } from "lucide-react";
 import { daysUntilDate } from "@/lib/calculations";
 
 export default function Dashboard() {
   const navigate = useNavigate();
-  const { tasks } = useTasksStore();
+  const { tasks, completeTask, uncompleteTask } = useTasksStore();
   const { exams } = useExamsStore();
   const { getTodaySessions, getStats } = useTimerStore();
+  const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
 
   // Calculate stats directly without useEffect to avoid infinite loops
   const today = new Date().toDateString();
@@ -46,6 +46,14 @@ export default function Dashboard() {
 
   const daysToNextExam = nextExam ? daysUntilDate(nextExam.examDate) : null;
 
+  const handleToggleTask = (taskId: string, currentStatus: string) => {
+    if (currentStatus === "completed") {
+      uncompleteTask(taskId);
+    } else {
+      completeTask(taskId);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground pb-32">
       <div className="max-w-4xl mx-auto px-4 lg:px-6 py-8">
@@ -64,7 +72,8 @@ export default function Dashboard() {
         {/* Key Stats Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           {/* Tasks Card */}
-          <div className="glass p-4 rounded-xl hover:shadow-lg transition-all duration-300 cursor-pointer"
+          <div
+            className="glass p-4 rounded-xl hover:shadow-lg transition-all duration-300 cursor-pointer"
             onClick={() => navigate("/tasks")}
           >
             <div className="flex items-center justify-between mb-3">
@@ -79,7 +88,8 @@ export default function Dashboard() {
           </div>
 
           {/* Focus Time */}
-          <div className="glass p-4 rounded-xl hover:shadow-lg transition-all duration-300 cursor-pointer"
+          <div
+            className="glass p-4 rounded-xl hover:shadow-lg transition-all duration-300 cursor-pointer"
             onClick={() => navigate("/adaptive-timer")}
           >
             <div className="flex items-center justify-between mb-3">
@@ -94,7 +104,8 @@ export default function Dashboard() {
           </div>
 
           {/* Exams */}
-          <div className="glass p-4 rounded-xl hover:shadow-lg transition-all duration-300 cursor-pointer"
+          <div
+            className="glass p-4 rounded-xl hover:shadow-lg transition-all duration-300 cursor-pointer"
             onClick={() => navigate("/exams")}
           >
             <div className="flex items-center justify-between mb-3">
@@ -139,12 +150,16 @@ export default function Dashboard() {
                   .filter((t) => new Date(t.deadline).toDateString() === new Date().toDateString())
                   .slice(0, 5)
                   .map((task) => (
-                    <div key={task.id} className="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors">
+                    <div
+                      key={task.id}
+                      className="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors cursor-pointer"
+                      onClick={() => handleToggleTask(task.id, task.status)}
+                    >
                       <input
                         type="checkbox"
                         checked={task.status === "completed"}
-                        readOnly
-                        className="mt-1 w-4 h-4 rounded cursor-pointer"
+                        onChange={() => handleToggleTask(task.id, task.status)}
+                        className="mt-1 w-4 h-4 rounded cursor-pointer accent-primary"
                       />
                       <div className="flex-1 min-w-0">
                         <p
@@ -286,16 +301,24 @@ export default function Dashboard() {
               <p className="text-sm text-muted-foreground mb-3">
                 Overclock v1.0 • Created by Kushagra
               </p>
-              <a
-                href="mailto:kushagramishra468@gmail.com?subject=Overclock Feedback"
-                className="inline-flex items-center gap-2 text-sm text-primary font-medium hover:text-primary/80 transition-colors"
+              <button
+                type="button"
+                onClick={() => setIsFeedbackOpen(true)}
+                className="inline-flex items-center gap-2 text-sm text-primary font-medium hover:text-primary/80 transition-colors cursor-pointer"
               >
                 💌 Send feedback
-              </a>
+              </button>
             </div>
           </div>
         </div>
+
+        <FeedbackModal
+          isOpen={isFeedbackOpen}
+          onClose={() => setIsFeedbackOpen(false)}
+        />
       </div>
     </div>
   );
 }
+
+

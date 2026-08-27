@@ -12,8 +12,6 @@ import Startup from "./pages/Startup";
 import Dashboard from "./pages/Dashboard";
 import Tasks from "./pages/Tasks";
 import Exams from "./pages/Exams";
-import Schedule from "./pages/Schedule";
-import Sleep from "./pages/Sleep";
 import Settings from "./pages/Settings";
 import AdaptiveTimer from "./pages/AdaptiveTimer";
 import CrisisMode from "./pages/CrisisMode";
@@ -39,8 +37,6 @@ const App = () => {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/tasks" element={<Tasks />} />
             <Route path="/exams" element={<Exams />} />
-            <Route path="/schedule" element={<Schedule />} />
-            <Route path="/sleep" element={<Sleep />} />
             <Route path="/adaptive-timer" element={<AdaptiveTimer />} />
             <Route path="/crisis-mode" element={<CrisisMode />} />
             <Route path="/settings" element={<Settings />} />

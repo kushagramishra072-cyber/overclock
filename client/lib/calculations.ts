@@ -1,4 +1,4 @@
-import { Task, Exam, SleepLog } from "@shared/api";
+import { Task, Exam } from "@shared/api";
 
 /**
  * Calculate task completion rate (0-100)
@@ -34,41 +34,19 @@ export function calculateDeadlineCompression(tasks: Task[]): number {
 }
 
 /**
- * Calculate sleep consistency (0-100)
- * Based on how many nights in last 7 days had >= 7 hours of sleep
- */
-export function calculateSleepConsistency(sleepLogs: SleepLog[]): number {
-  if (sleepLogs.length === 0) return 50; // Default if no data
-
-  const lastWeek = sleepLogs.filter((log) => {
-    const logDate = new Date(log.date);
-    const weekAgo = new Date();
-    weekAgo.setDate(weekAgo.getDate() - 7);
-    return logDate >= weekAgo;
-  });
-
-  if (lastWeek.length === 0) return 50;
-
-  const goodSleep = lastWeek.filter((log) => log.durationMinutes >= 420).length; // 7 hours = 420 minutes
-  return Math.round((goodSleep / 7) * 100); // Divide by 7 for full week
-}
-
-/**
  * Calculate Survival Score (0-100)
  * Weighted calculation:
- * - Task completion: 40%
- * - Deadline compression (inverted): 35%
- * - Sleep consistency: 25%
+ * - Task completion: 50%
+ * - Deadline compression (inverted): 50%
  */
 export function calculateSurvivalScore(
   completionRate: number,
   deadlineCompression: number,
-  sleepConsistency: number
+  _sleepConsistency?: number
 ): number {
   const score =
-    completionRate * 0.4 +
-    (100 - deadlineCompression) * 0.35 +
-    sleepConsistency * 0.25;
+    completionRate * 0.5 +
+    (100 - deadlineCompression) * 0.5;
 
   return Math.round(Math.max(0, Math.min(100, score)));
 }
@@ -115,37 +93,6 @@ export function getNearestExamSubject(exams: Exam[]): string | null {
   });
 
   return nearest.subject;
-}
-
-/**
- * Calculate average sleep duration in minutes from last 7 days
- */
-export function calculateAverageSleep(sleepLogs: SleepLog[]): number {
-  const lastWeek = sleepLogs.filter((log) => {
-    const logDate = new Date(log.date);
-    const weekAgo = new Date();
-    weekAgo.setDate(weekAgo.getDate() - 7);
-    return logDate >= weekAgo;
-  });
-
-  if (lastWeek.length === 0) return 0;
-
-  const totalMinutes = lastWeek.reduce((sum, log) => sum + log.durationMinutes, 0);
-  return totalMinutes / lastWeek.length;
-}
-
-/**
- * Count days with less than 7 hours of sleep in last 7 days
- */
-export function countDaysBelow7Hours(sleepLogs: SleepLog[]): number {
-  const lastWeek = sleepLogs.filter((log) => {
-    const logDate = new Date(log.date);
-    const weekAgo = new Date();
-    weekAgo.setDate(weekAgo.getDate() - 7);
-    return logDate >= weekAgo;
-  });
-
-  return lastWeek.filter((log) => log.durationMinutes < 420).length; // 7 hours = 420 minutes
 }
 
 /**

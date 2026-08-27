@@ -191,7 +191,7 @@ export function useResourceFetcher() {
     let specificMaterials: string[] = [];
     let topicsCovered = "";
 
-    for (const [dbChapter, dbData] of Object.entries(gradeData)) {
+    for (const [dbChapter, dbData] of Object.entries(gradeData) as [string, any][]) {
       if (chapter.toLowerCase().includes(dbChapter.toLowerCase()) ||
           dbChapter.toLowerCase().includes(chapter.toLowerCase())) {
         specificMaterials = dbData.studyMaterials || [];

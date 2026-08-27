@@ -2,8 +2,6 @@ import { useState } from "react";
 import { useDarkMode } from "@/hooks/useDarkMode";
 import { useTasksStore } from "@/hooks/useTasksStore";
 import { useExamsStore } from "@/hooks/useExamsStore";
-import { useScheduleStore } from "@/hooks/useScheduleStore";
-import { useSleepStore } from "@/hooks/useSleepStore";
 import HomeButton from "@/components/HomeButton";
 import { Moon, Sun, Download, Trash2, AlertCircle } from "lucide-react";
 
@@ -11,8 +9,6 @@ export default function Settings() {
   const { isDark, toggle: toggleDarkMode } = useDarkMode();
   const { tasks } = useTasksStore();
   const { exams } = useExamsStore();
-  const { classes } = useScheduleStore();
-  const { logs: sleepLogs } = useSleepStore();
   const [showReset, setShowReset] = useState(false);
   const [resetConfirmed, setResetConfirmed] = useState(false);
 
@@ -20,8 +16,6 @@ export default function Settings() {
     const data = {
       tasks,
       exams,
-      scheduleClasses: classes,
-      sleepLogs,
       exportDate: new Date().toISOString(),
     };
 
@@ -45,8 +39,6 @@ export default function Settings() {
 
     localStorage.removeItem("student_survival_tasks");
     localStorage.removeItem("student_survival_exams");
-    localStorage.removeItem("student_survival_schedule");
-    localStorage.removeItem("student_survival_sleep");
 
     window.location.reload();
   };

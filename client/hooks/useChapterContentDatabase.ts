@@ -38,237 +38,576 @@ export interface ChapterContent {
 const CHAPTER_DATABASE: Record<string, Record<string, Record<string, ChapterContent>>> = {
   cbse: {
     "10th": {
+      "real-numbers": {
+        name: "Real Numbers",
+        difficulty: 5,
+        expectedHours: 6,
+        marksWeightage: 6,
+        conceptDensity: 6,
+        memorizationLoad: 4,
+        problemSolvingLoad: 7,
+        majorTopics: [
+          {
+            name: "Fundamental Theorem of Arithmetic",
+            subtopics: [
+              "Prime factorization of composite numbers (n = p1^a1 · p2^a2...)",
+              "HCF and LCM using prime factors",
+              "Formula: HCF(a,b) × LCM(a,b) = a × b",
+              "Applications in word problems (bells ringing together, circular tracks)",
+            ],
+            timeMinutes: 45,
+            importance: 10,
+            difficulty: 4,
+            formulasCount: 2,
+            diagramsCount: 0,
+          },
+          {
+            name: "Proof of Irrationality",
+            subtopics: [
+              "Proof by contradiction technique",
+              "Proving √2, √3, √5 are irrational line-by-line",
+              "Proving composite expressions like 3 + 2√5 or 1/√2 are irrational",
+              "Theorem: If p divides a², then p divides a (where p is prime)",
+            ],
+            timeMinutes: 60,
+            importance: 10,
+            difficulty: 6,
+            formulasCount: 0,
+            diagramsCount: 0,
+          },
+          {
+            name: "Decimal Expansions of Rational Numbers",
+            subtopics: [
+              "Terminating vs Non-terminating repeating decimals",
+              "Condition for terminating decimal: denominator q = 2^m · 5^n",
+              "Converting recurring decimals to p/q form",
+            ],
+            timeMinutes: 30,
+            importance: 8,
+            difficulty: 3,
+            formulasCount: 1,
+            diagramsCount: 0,
+          },
+        ],
+        formulas: [
+          {
+            name: "HCF-LCM Relationship",
+            formula: "HCF(a, b) × LCM(a, b) = a × b",
+            whenToUse: "Finding LCM or HCF when two numbers and one value are given",
+            commonMistakes: [
+              "Applying this formula for 3 numbers (valid ONLY for 2 numbers)",
+              "Arithmetic error while calculating prime powers",
+            ],
+          },
+          {
+            name: "Prime Factorization Form",
+            formula: "N = p1^a1 × p2^a2 × ... × pk^ak",
+            whenToUse: "Determining HCF (lowest power of common prime) and LCM (highest power of all prime factors)",
+            commonMistakes: ["Missing a prime factor or taking incorrect powers"],
+          },
+        ],
+        commonMistakes: [
+          "Assuming HCF × LCM = a × b × c for three numbers (it only works for two numbers)",
+          "Forgetting to state that p and q are co-prime (HCF = 1) in irrationality proofs",
+          "Confusing terminating denominator condition q = 2^m · 5^n with numerator factors",
+        ],
+        previousYearTrends: [
+          { topic: "Prove √3 or 5 - √2 is irrational (3 marks)", frequency: "high", marksRange: "3" },
+          { topic: "Find HCF and LCM using prime factorization & verify HCF × LCM = a × b", frequency: "high", marksRange: "2-3" },
+          { topic: "Word problem on HCF/LCM (4 marks)", frequency: "medium", marksRange: "4" },
+        ],
+        flashcardQuestions: [
+          "State the Fundamental Theorem of Arithmetic",
+          "Write the formula connecting HCF, LCM, and two numbers a and b",
+          "What is the condition on the denominator of a rational number p/q for its decimal expansion to terminate?",
+          "If HCF(306, 657) = 9, find LCM(306, 657)",
+        ],
+        selfTestQuestions: [
+          "Prove that √5 is irrational using contradiction method",
+          "Find the HCF and LCM of 96 and 404 by prime factorisation method and verify HCF × LCM = Product of numbers",
+          "Check whether 6^n can end with the digit 0 for any natural number n",
+        ],
+        mustKnowTopics: [
+          "HCF(a,b) × LCM(a,b) = a × b",
+          "Line-by-line proof that √2, √3, or √5 is irrational",
+          "Prime factorisation method for HCF and LCM",
+        ],
+        shouldKnowTopics: [
+          "Proving 3 + 2√5 is irrational",
+          "q = 2^m · 5^n terminating decimal test",
+        ],
+        niceToKnowTopics: ["Euclid's Division Lemma (historical context)"],
+        revisionPoints: [
+          "HCF = product of smallest power of each common prime factor",
+          "LCM = product of greatest power of each prime factor involved",
+          "In irrationality proof, always write: 'Let √p = a/b where a,b are co-prime integers, b ≠ 0'",
+        ],
+      },
+      "arithmetic-progressions": {
+        name: "Arithmetic Progressions",
+        difficulty: 6,
+        expectedHours: 8,
+        marksWeightage: 7,
+        conceptDensity: 7,
+        memorizationLoad: 5,
+        problemSolvingLoad: 8,
+        majorTopics: [
+          {
+            name: "nth Term of an AP",
+            subtopics: [
+              "Definition of AP: sequence where difference d between consecutive terms is constant",
+              "Formula: a_n = a + (n-1)d",
+              "Finding nth term from the end: a_n(end) = l - (n-1)d",
+              "Checking whether a given sequence or number is in the AP",
+            ],
+            timeMinutes: 60,
+            importance: 10,
+            difficulty: 5,
+            formulasCount: 2,
+            diagramsCount: 0,
+          },
+          {
+            name: "Sum of First n Terms of an AP",
+            subtopics: [
+              "Formula 1: S_n = (n/2) · [2a + (n-1)d]",
+              "Formula 2: S_n = (n/2) · [a + l] (when last term l is known)",
+              "Relation between S_n and a_n: a_n = S_n - S_{n-1}",
+              "Sum of first n positive integers: S_n = n(n+1)/2",
+            ],
+            timeMinutes: 90,
+            importance: 10,
+            difficulty: 6,
+            formulasCount: 3,
+            diagramsCount: 0,
+          },
+          {
+            name: "Real-Life AP Word Problems",
+            subtopics: [
+              "Savings/installment schemes",
+              "Seating arrangements & ladder rung spacing",
+              "Sum of series in practical contexts",
+            ],
+            timeMinutes: 60,
+            importance: 8,
+            difficulty: 6,
+            formulasCount: 1,
+            diagramsCount: 0,
+          },
+        ],
+        formulas: [
+          {
+            name: "nth Term Formula",
+            formula: "a_n = a + (n - 1)d",
+            whenToUse: "Finding any term value, term index n, first term a, or common difference d",
+            commonMistakes: [
+              "Confusing term index n with term value a_n",
+              "Taking common difference d as positive when terms are decreasing",
+            ],
+          },
+          {
+            name: "Sum of n Terms Formula",
+            formula: "S_n = (n/2) × [2a + (n - 1)d]  OR  S_n = (n/2) × (a + l)",
+            whenToUse: "Calculating sum of AP series or solving total sum word problems",
+            commonMistakes: [
+              "Forgetting the factor 1/2 in n/2",
+              "Misidentifying last term l vs common difference d",
+            ],
+          },
+          {
+            name: "Term from Sum Relation",
+            formula: "a_n = S_n - S_{n-1}",
+            whenToUse: "Finding individual terms when S_n expression in terms of n is given",
+            commonMistakes: ["Algebraic simplification error while evaluating S_{n-1}"],
+          },
+        ],
+        commonMistakes: [
+          "Writing common difference d with wrong sign when sequence is decreasing (d < 0)",
+          "Confusing n (position of term, must be a positive integer) with a_n (value of term)",
+          "Errors when calculating a_n = S_n - S_{n-1} due to unexpanded brackets",
+        ],
+        previousYearTrends: [
+          { topic: "Find term index or common difference d given two terms (3 marks)", frequency: "high", marksRange: "3" },
+          { topic: "Sum of AP word problems (4-5 marks)", frequency: "high", marksRange: "4-5" },
+          { topic: "If S_n is given, find a_n and 20th term (3 marks)", frequency: "medium", marksRange: "3" },
+        ],
+        flashcardQuestions: [
+          "What is the general term a_n of an AP with first term a and common difference d?",
+          "Write the two formulas for the sum of first n terms of an AP",
+          "How do you find the nth term a_n if the sum formula S_n is given?",
+          "What is the sum of first n natural numbers?",
+        ],
+        selfTestQuestions: [
+          "Find the 20th term from the end of the AP: 3, 8, 13, ..., 253",
+          "The sum of the 4th and 8th terms of an AP is 24 and the sum of the 6th and 10th terms is 44. Find the first three terms of the AP",
+          "If S_n = 3n² + 5n, find the 16th term of this AP",
+        ],
+        mustKnowTopics: [
+          "a_n = a + (n-1)d formula and applications",
+          "S_n = (n/2)[2a + (n-1)d] and S_n = (n/2)(a + l)",
+          "a_n = S_n - S_{n-1} relationship",
+        ],
+        shouldKnowTopics: [
+          "nth term from the end: l - (n-1)d",
+          "Word problems on AP sums",
+        ],
+        niceToKnowTopics: ["Selection of 3 terms in AP (a-d, a, a+d)"],
+        revisionPoints: [
+          "Common difference d = a2 - a1 = a3 - a2",
+          "Number of terms n must ALWAYS be a positive integer (1, 2, 3...)",
+          "If 3 numbers a, b, c are in AP, then 2b = a + c",
+        ],
+      },
+      "quadratic-equations": {
+        name: "Quadratic Equations",
+        difficulty: 7,
+        expectedHours: 8,
+        marksWeightage: 8,
+        conceptDensity: 8,
+        memorizationLoad: 5,
+        problemSolvingLoad: 9,
+        majorTopics: [
+          {
+            name: "Standard Form & Factorization",
+            subtopics: [
+              "Standard form: ax² + bx + c = 0 (a ≠ 0)",
+              "Solving by splitting the middle term",
+              "Verifying roots by substitution",
+            ],
+            timeMinutes: 45,
+            importance: 9,
+            difficulty: 5,
+            formulasCount: 1,
+            diagramsCount: 0,
+          },
+          {
+            name: "Quadratic Formula & Discriminant",
+            subtopics: [
+              "Discriminant formula: D = b² - 4ac",
+              "Quadratic formula: x = (-b ± √D) / (2a)",
+              "Nature of roots: D > 0 (2 distinct real roots), D = 0 (2 equal real roots), D < 0 (no real roots)",
+            ],
+            timeMinutes: 75,
+            importance: 10,
+            difficulty: 6,
+            formulasCount: 3,
+            diagramsCount: 0,
+          },
+          {
+            name: "Exam Word Problems",
+            subtopics: [
+              "Speed, distance & time (train/boat upstream & downstream)",
+              "Work & time (water taps filling tank)",
+              "Age & geometric area problems",
+            ],
+            timeMinutes: 90,
+            importance: 10,
+            difficulty: 8,
+            formulasCount: 1,
+            diagramsCount: 0,
+          },
+        ],
+        formulas: [
+          {
+            name: "Discriminant Formula",
+            formula: "D = b² - 4ac",
+            whenToUse: "Determining nature of roots or finding unknown constant k when roots are equal (D=0)",
+            commonMistakes: ["Errors in signs when b or c is negative (e.g. (-4)² vs -4²)"],
+          },
+          {
+            name: "Quadratic Formula",
+            formula: "x = (-b ± √(b² - 4ac)) / (2a)",
+            whenToUse: "Finding roots directly for any quadratic equation ax² + bx + c = 0",
+            commonMistakes: ["Dividing only √D by 2a instead of (-b ± √D)", "Forgetting negative sign of -b"],
+          },
+        ],
+        commonMistakes: [
+          "Writing b² - 4ac incorrectly when b is negative e.g. -3² instead of (-3)² = +9",
+          "Forgetting to reject negative values of speed, age, or distance in word problems",
+          "Dividing by 2a incompletely in x = (-b ± √D)/(2a)",
+        ],
+        previousYearTrends: [
+          { topic: "Find value of k for which equation has equal roots (D=0) (2-3 marks)", frequency: "high", marksRange: "2-3" },
+          { topic: "Upstream/Downstream boat or Train speed word problem (4-5 marks)", frequency: "high", marksRange: "4-5" },
+          { topic: "Solve quadratic equation using quadratic formula (3 marks)", frequency: "high", marksRange: "3" },
+        ],
+        flashcardQuestions: [
+          "What is the standard form of a quadratic equation?",
+          "Write the quadratic formula for finding roots of ax² + bx + c = 0",
+          "What are the three conditions for nature of roots based on discriminant D?",
+        ],
+        selfTestQuestions: [
+          "Find the value of k for which equation 2x² + kx + 3 = 0 has two equal real roots",
+          "A motor boat whose speed is 18 km/h in still water takes 1 hour more to go 24 km upstream than to return downstream. Find speed of stream",
+          "Solve for x: 1/(x-1) - 1/(x+5) = 1/6",
+        ],
+        mustKnowTopics: [
+          "Discriminant D = b² - 4ac and nature of roots rules",
+          "Quadratic formula x = (-b ± √D)/2a",
+          "Equal roots condition D = 0",
+        ],
+        shouldKnowTopics: ["Upstream & Downstream speed equations", "Splitting middle term"],
+        niceToKnowTopics: ["Completing the square derivation history"],
+        revisionPoints: [
+          "D > 0 → 2 distinct real roots; D = 0 → 2 equal real roots x = -b/2a; D < 0 → no real roots",
+          "In speed-time word problems: Upstream speed = (x - y), Downstream speed = (x + y)",
+        ],
+      },
+      "introduction-to-trigonometry": {
+        name: "Introduction to Trigonometry",
+        difficulty: 8,
+        expectedHours: 10,
+        marksWeightage: 8,
+        conceptDensity: 9,
+        memorizationLoad: 7,
+        problemSolvingLoad: 9,
+        majorTopics: [
+          {
+            name: "Trigonometric Ratios & Table Values",
+            subtopics: [
+              "Ratios: sinθ = P/H, cosθ = B/H, tanθ = P/B, cosecθ = H/P, secθ = H/B, cotθ = B/P",
+              "Standard angle table: 0°, 30°, 45°, 60°, 90°",
+              "Reciprocal relations: tanθ = sinθ/cosθ, cotθ = cosθ/sinθ",
+            ],
+            timeMinutes: 60,
+            importance: 10,
+            difficulty: 5,
+            formulasCount: 6,
+            diagramsCount: 2,
+          },
+          {
+            name: "Trigonometric Identities",
+            subtopics: [
+              "Identity 1: sin²θ + cos²θ = 1",
+              "Identity 2: 1 + tan²θ = sec²θ",
+              "Identity 3: 1 + cot²θ = cosec²θ",
+              "Proving trigonometric identities step-by-step",
+            ],
+            timeMinutes: 120,
+            importance: 10,
+            difficulty: 8,
+            formulasCount: 3,
+            diagramsCount: 0,
+          },
+        ],
+        formulas: [
+          {
+            name: "Fundamental Identity 1",
+            formula: "sin²θ + cos²θ = 1",
+            whenToUse: "Converting between sinθ and cosθ or simplifying expressions",
+            commonMistakes: ["Writing sin²θ + cos²θ = 2 or confusing with sinθ + cosθ"],
+          },
+          {
+            name: "Fundamental Identity 2",
+            formula: "1 + tan²θ = sec²θ  (or sec²θ - tan²θ = 1)",
+            whenToUse: "Simplifying secθ and tanθ expressions and proving identities",
+            commonMistakes: ["Mixing up sec²θ - tan²θ = 1 with tan²θ - sec²θ = 1"],
+          },
+          {
+            name: "Fundamental Identity 3",
+            formula: "1 + cot²θ = cosec²θ  (or cosec²θ - cot²θ = 1)",
+            whenToUse: "Simplifying cosecθ and cotθ terms",
+            commonMistakes: ["Sign errors when transposing cot²θ"],
+          },
+        ],
+        commonMistakes: [
+          "Confusing Perpendicular and Base depending on which acute angle θ is chosen",
+          "Writing sin(A+B) = sinA + sinB (trigonometric functions do NOT distribute)",
+          "Errors in substituting exact values from the 0°-90° table e.g. sin 60° = √3/2 vs tan 30° = 1/√3",
+        ],
+        previousYearTrends: [
+          { topic: "Prove trigonometric identity (4-5 marks)", frequency: "high", marksRange: "4-5" },
+          { topic: "Evaluate expression using standard angle table values (2-3 marks)", frequency: "high", marksRange: "2-3" },
+          { topic: "Given one ratio e.g. sin A = 3/4, find other ratios (2 marks)", frequency: "medium", marksRange: "2" },
+        ],
+        flashcardQuestions: [
+          "State the three primary trigonometric identities",
+          "What are the values of sin 30°, cos 30°, sin 45°, and tan 60°?",
+          "What is the reciprocal of tan θ?",
+        ],
+        selfTestQuestions: [
+          "Prove that (sin A + cosec A)² + (cos A + sec A)² = 7 + tan² A + cot² A",
+          "Prove that (1 + tan θ + sec θ)(1 + cot θ - cosec θ) = 2",
+          "If 15 cot A = 8, find sin A and sec A",
+        ],
+        mustKnowTopics: [
+          "sin²θ + cos²θ = 1, 1 + tan²θ = sec²θ, 1 + cot²θ = cosec²θ",
+          "Standard angle values (0°, 30°, 45°, 60°, 90°)",
+          "Step-by-step proofs of identities converting LHS to sin and cos",
+        ],
+        shouldKnowTopics: ["Right triangle ratio definitions P/H, B/H, P/B"],
+        niceToKnowTopics: ["Historical origins of sine and cosine"],
+        revisionPoints: [
+          "When stuck in identity proofs: convert everything to sin θ and cos θ",
+          "Table trick: sin values are √(0/4), √(1/4), √(2/4), √(3/4), √(4/4) → 0, 1/2, 1/√2, √3/2, 1",
+        ],
+      },
       "light-reflection-refraction": {
         name: "Light: Reflection and Refraction",
         difficulty: 6,
-        expectedHours: 15,
+        expectedHours: 10,
         marksWeightage: 8,
         conceptDensity: 7,
         memorizationLoad: 4,
         problemSolvingLoad: 8,
         majorTopics: [
           {
-            name: "Laws of Reflection",
+            name: "Spherical Mirrors & Mirror Formula",
             subtopics: [
-              "Definition of reflection",
-              "Law 1: Angle of Incidence = Angle of Reflection",
-              "Law 2: Incident ray, reflected ray, and normal are in the same plane",
-              "Lateral inversion",
-              "Ray diagrams",
-            ],
-            timeMinutes: 45,
-            importance: 9,
-            difficulty: 2,
-            formulasCount: 0,
-            diagramsCount: 5,
-          },
-          {
-            name: "Plane Mirrors",
-            subtopics: [
-              "Image formation in plane mirrors",
-              "Properties of plane mirror images",
-              "Real vs virtual images",
-              "Magnification in plane mirrors",
-              "Multiple images in plane mirrors",
-            ],
-            timeMinutes: 60,
-            importance: 9,
-            difficulty: 3,
-            formulasCount: 2,
-            diagramsCount: 8,
-          },
-          {
-            name: "Spherical Mirrors",
-            subtopics: [
-              "Concave mirrors",
-              "Convex mirrors",
-              "Pole, center of curvature, principal axis",
-              "Principal focus and focal length",
-              "Relationship: f = R/2",
-              "Sign convention",
+              "Concave vs Convex mirrors & 6 image formation cases",
+              "Cartesian sign convention (u is always negative)",
+              "Mirror formula: 1/f = 1/v + 1/u",
+              "Magnification: m = -v/u = h'/h",
             ],
             timeMinutes: 90,
             importance: 10,
-            difficulty: 5,
-            formulasCount: 3,
+            difficulty: 6,
+            formulasCount: 2,
             diagramsCount: 12,
           },
           {
-            name: "Mirror Formula and Magnification",
+            name: "Refraction & Lens Formula",
             subtopics: [
-              "Mirror formula derivation: 1/f = 1/v + 1/u",
-              "Image formation by concave mirrors (6 cases)",
-              "Image formation by convex mirrors",
-              "Linear magnification: m = -v/u",
-              "Problems with different object positions",
+              "Laws of refraction & Snell's law: n1 sin θ1 = n2 sin θ2",
+              "Refractive index: n = c / v",
+              "Lens formula: 1/f = 1/v - 1/u",
+              "Magnification: m = +v/u = h'/h",
+              "Power of lens: P = 1/f (in meters, dioptres D)",
             ],
             timeMinutes: 120,
             importance: 10,
             difficulty: 7,
-            formulasCount: 2,
-            diagramsCount: 15,
-          },
-          {
-            name: "Refraction of Light",
-            subtopics: [
-              "Definition of refraction",
-              "Laws of refraction",
-              "Refractive index definition",
-              "Snell's law: n1 sin θ1 = n2 sin θ2",
-              "Relative refractive index",
-              "Light bending toward/away from normal",
-            ],
-            timeMinutes: 75,
-            importance: 9,
-            difficulty: 4,
-            formulasCount: 2,
-            diagramsCount: 6,
-          },
-          {
-            name: "Lenses",
-            subtopics: [
-              "Convex lens (converging)",
-              "Concave lens (diverging)",
-              "Focal length and power",
-              "Lens formula: 1/f = 1/v + 1/u",
-              "Image formation by convex lens (5 cases)",
-              "Image formation by concave lens",
-              "Magnification by lenses",
-              "Power of lens: P = 1/f (in meters)",
-            ],
-            timeMinutes: 150,
-            importance: 10,
-            difficulty: 7,
             formulasCount: 4,
-            diagramsCount: 20,
+            diagramsCount: 15,
           },
         ],
         formulas: [
           {
             name: "Mirror Formula",
             formula: "1/f = 1/v + 1/u",
-            whenToUse: "Finding focal length, object distance, or image distance for any spherical mirror",
+            whenToUse: "Calculating focal length f, image distance v, or object distance u for spherical mirrors",
             commonMistakes: [
-              "Forgetting sign convention - u, v, f all have signs",
-              "Using positive values for all distances",
-              "Not distinguishing between real and virtual distances",
+              "Forgetting sign convention (u is always negative; f is negative for concave, positive for convex)",
             ],
           },
           {
             name: "Lens Formula",
-            formula: "1/f = 1/v + 1/u",
-            whenToUse: "Finding focal length, object distance, or image distance for any lens",
+            formula: "1/f = 1/v - 1/u",
+            whenToUse: "Calculating v, u, or f for convex/concave lenses",
             commonMistakes: [
-              "Confusing lens formula with mirror formula (they're the same but sign convention differs)",
-              "Not applying sign convention correctly for lenses",
-              "Forgetting that object is always on left side for lenses",
+              "Confusing minus sign in lens formula (1/v - 1/u) with plus sign in mirror formula (1/v + 1/u)",
             ],
           },
           {
-            name: "Magnification (Mirror/Lens)",
-            formula: "m = -v/u or m = h'/h",
-            whenToUse: "Finding image height, magnification, or comparing object and image sizes",
-            commonMistakes: [
-              "Ignoring the negative sign which indicates image inversion",
-              "Mixing up linear magnification with area magnification",
-              "Not understanding that m < 1 means diminished image",
-            ],
-          },
-          {
-            name: "Power of Lens",
-            formula: "P = 1/f (focal length in meters)",
-            whenToUse: "Expressing lens strength in diopters, comparing lens powers",
-            commonMistakes: [
-              "Forgetting to convert focal length to meters",
-              "Not understanding that higher power = stronger lens = shorter focal length",
-            ],
+            name: "Power of Lens Formula",
+            formula: "P = 1 / f (f in meters)",
+            whenToUse: "Finding power in Dioptres (D) or focal length from power",
+            commonMistakes: ["Substituting focal length f in cm instead of meters"],
           },
         ],
         commonMistakes: [
-          "Confusing concave and convex mirrors - concave converges light, convex diverges",
-          "Wrong sign convention - real objects have u > 0, real images have v > 0",
-          "Focal length sign: concave/converging lens f > 0, convex/diverging f < 0",
-          "Forgetting that plane mirrors always form virtual, erect, same-size images",
-          "Making arithmetic errors with signs in mirror/lens formula",
-          "Not drawing ray diagrams to verify answers",
-          "Confusing focal length f with radius of curvature R (R = 2f)",
-          "Mixing up lateral inversion (plane mirror) with image inversion (curved mirrors)",
-          "Assuming all mirror formulas work the same way (they do, but signs differ)",
-          "Not understanding that convex lenses can form both real and virtual images",
+          "Substituting f in cm directly into P = 1/f without converting to meters",
+          "Mixing up magnification signs: negative m = real & inverted, positive m = virtual & erect",
+          "Confusing lens formula (1/f = 1/v - 1/u) with mirror formula (1/f = 1/v + 1/u)",
         ],
         previousYearTrends: [
-          { topic: "Mirror formula numerical problems", frequency: "high", marksRange: "3-5" },
-          { topic: "Lens formula problems", frequency: "high", marksRange: "3-5" },
-          { topic: "Ray diagrams for mirrors and lenses", frequency: "high", marksRange: "2-3" },
-          { topic: "Laws of reflection and refraction", frequency: "medium", marksRange: "2" },
-          { topic: "Magnification calculations", frequency: "medium", marksRange: "2" },
-          { topic: "Image formation cases", frequency: "high", marksRange: "1-2 per case" },
-          { topic: "Refractive index calculations", frequency: "medium", marksRange: "2-3" },
-          { topic: "Power of lens", frequency: "medium", marksRange: "1-2" },
+          { topic: "Lens / Mirror numerical with ray diagram (5 marks)", frequency: "high", marksRange: "5" },
+          { topic: "Power of combination of lenses (2-3 marks)", frequency: "high", marksRange: "2-3" },
+          { topic: "Refractive index & Snell's law numericals (3 marks)", frequency: "medium", marksRange: "3" },
         ],
         flashcardQuestions: [
-          "State the two laws of reflection",
-          "What is the sign convention for spherical mirrors?",
-          "Derive the mirror formula starting from geometry",
-          "What is the focal length of a mirror with radius of curvature 40 cm?",
-          "A concave mirror has f = 15 cm. Where should an object be placed to get a magnified real image?",
-          "Define refractive index and give its formula",
-          "What is Snell's law and when does total internal reflection occur?",
-          "Distinguish between concave and convex lenses",
-          "What is power of a lens? Calculate power of a lens with f = 0.5 m",
-          "Can a concave lens form a real image? Explain",
+          "Write the Mirror Formula and Lens Formula side by side",
+          "What is the sign of focal length f for a concave mirror and a convex lens?",
+          "Define 1 Dioptre of power of a lens",
         ],
         selfTestQuestions: [
-          "An object 5 cm tall is placed 30 cm from a concave mirror of focal length 10 cm. Find image distance, magnification, and nature of image",
-          "A light ray hits a plane mirror. Angle of incidence is 35°. What is angle of reflection?",
-          "A convex lens has focal length 25 cm. An object is placed 50 cm away. Find image position and magnification",
-          "Refractive index of glass is 1.5. Light travels from glass to air. Calculate critical angle",
-          "Two mirrors are placed at 60° angle. How many images of an object will be formed?",
-          "A concave mirror forms an image 3 times larger than object. If object is 10 cm away, find focal length",
-          "Light enters water (n=1.33) from air at 45° angle. Calculate refraction angle",
-          "A lens has power -2D. Find focal length and type of lens",
-          "An object placed at center of curvature of concave mirror. Describe the image",
-          "A converging lens and diverging lens of powers +5D and -3D are in contact. Find combined power",
+          "A concave mirror produces three times magnified real image of an object placed at 10 cm in front of it. Where is the image located?",
+          "A convex lens forms a real and inverted image of a needle at a distance of 50 cm from it. Where is the needle placed if image size equals object size? Find power of lens",
+          "Find the focal length of a lens of power -2.0 D. What type of lens is this?",
         ],
         mustKnowTopics: [
-          "Mirror formula: 1/f = 1/v + 1/u",
-          "Sign convention for mirrors",
-          "Lens formula and power of lens",
-          "Image formation by concave mirrors (all 6 cases)",
-          "Image formation by convex lens (all 5 cases)",
-          "Ray diagrams for mirrors and lenses",
-          "Magnification formula: m = -v/u",
-          "Snell's law: n1 sin θ1 = n2 sin θ2",
-          "Relationship: f = R/2",
-          "Total internal reflection concept",
+          "Mirror Formula: 1/f = 1/v + 1/u",
+          "Lens Formula: 1/f = 1/v - 1/u",
+          "Power P = 1/f(m) and dioptre unit",
+          "Ray diagrams for concave mirror & convex lens",
         ],
-        shouldKnowTopics: [
-          "Lateral inversion in plane mirrors",
-          "Multiple images in plane mirrors",
-          "Convex mirror image formation (fewer cases)",
-          "Concave lens image formation",
-          "Refractive index definition",
-          "Laws of reflection derivation",
-          "Critical angle calculation",
-        ],
-        niceToKnowTopics: [
-          "Derivation of mirror formula from geometry",
-          "Dispersion of light",
-          "Lens maker's formula",
-          "Combinations of lenses",
-          "Optical instruments design principles",
-        ],
+        shouldKnowTopics: ["Snell's Law n1 sin θ1 = n2 sin θ2", "Refractive Index n = c/v"],
+        niceToKnowTopics: ["Atmospheric refraction effects"],
         revisionPoints: [
-          "Mirror formula works for all spherical mirrors (concave/convex)",
-          "Concave mirrors: f > 0, Convex mirrors: f < 0",
-          "For real images: v > 0, For virtual images: v < 0",
-          "Magnification: positive = erect, negative = inverted",
-          "Plane mirror always: virtual, erect, same size (m = 1)",
-          "Convex lens: f > 0 (always converging)",
-          "Concave lens: f < 0 (always diverging)",
-          "Power P = 1/f in meters gives diopters",
-          "Refraction law: sin θ1 / sin θ2 = n2 / n1",
-          "Critical angle: sin θc = n2/n1 (for light going from denser to rarer medium)",
+          "Object distance u is ALWAYS negative (-u)",
+          "Real image → v is positive for lens, v is negative for mirror",
+          "P = P1 + P2 + P3 for lenses in contact",
+        ],
+      },
+      "chemical-reactions-and-equations": {
+        name: "Chemical Reactions and Equations",
+        difficulty: 5,
+        expectedHours: 6,
+        marksWeightage: 6,
+        conceptDensity: 6,
+        memorizationLoad: 6,
+        problemSolvingLoad: 5,
+        majorTopics: [
+          {
+            name: "Types of Chemical Reactions",
+            subtopics: [
+              "Combination: A + B → AB (e.g. CaO + H2O → Ca(OH)2 + heat)",
+              "Decomposition: AB → A + B (Thermal, Electrolytic, Photolytic: 2AgCl → 2Ag + Cl2)",
+              "Displacement: A + BC → AC + B (Fe + CuSO4 → FeSO4 + Cu)",
+              "Double Displacement & Precipitation: AB + CD → AD + CB",
+              "Redox Reactions: Oxidation (gain of O / loss of H) & Reduction (loss of O / gain of H)",
+            ],
+            timeMinutes: 90,
+            importance: 10,
+            difficulty: 5,
+            formulasCount: 0,
+            diagramsCount: 3,
+          },
+          {
+            name: "Balancing & Effects of Oxidation",
+            subtopics: [
+              "Law of Conservation of Mass in balancing equations",
+              "Corrosion of metals (rusting of iron: Fe2O3·xH2O)",
+              "Rancidity of fats/oils & prevention methods (nitrogen gas flushing)",
+            ],
+            timeMinutes: 45,
+            importance: 8,
+            difficulty: 4,
+            formulasCount: 0,
+            diagramsCount: 0,
+          },
+        ],
+        formulas: [],
+        commonMistakes: [
+          "Forgetting state symbols (s, l, g, aq) in balanced chemical equations",
+          "Confusing oxidizing agent (substance that gets reduced) with reducing agent",
+          "Misidentifying color changes in displacement reactions (blue CuSO4 turns pale green FeSO4)",
+        ],
+        previousYearTrends: [
+          { topic: "Balance chemical equation & identify type of reaction (3 marks)", frequency: "high", marksRange: "3" },
+          { topic: "Identify oxidized/reduced substance & oxidizing/reducing agent in redox reaction (3 marks)", frequency: "high", marksRange: "3" },
+          { topic: "Decomposition reaction activities e.g. Pb(NO3)2 heating or electrolysis of water (3-4 marks)", frequency: "high", marksRange: "3-4" },
+        ],
+        flashcardQuestions: [
+          "What is a redox reaction? Give one example",
+          "Why is respiration considered an exothermic reaction?",
+          "What happens when lead nitrate Pb(NO3)2 is heated? Write balanced equation",
+        ],
+        selfTestQuestions: [
+          "Write balanced chemical equations with state symbols: (a) Thermite reaction, (b) Heating ferrous sulphate crystals",
+          "Identify oxidizing and reducing agents in: CuO + H2 → Cu + H2O",
+          "Explain rancidity and list 2 ways to prevent it in food items",
+        ],
+        mustKnowTopics: [
+          "Decomposition of Pb(NO3)2 (brown fumes of NO2)",
+          "Redox identification: substance oxidized, reduced, oxidizing agent",
+          "Electrolysis of water (H2 at cathode : O2 at anode in 2:1 volume ratio)",
+        ],
+        shouldKnowTopics: ["Exothermic vs Endothermic reactions", "Displacement reactivity series"],
+        niceToKnowTopics: ["Corrosion prevention plating"],
+        revisionPoints: [
+          "Oxidation = Gain of O2 / Loss of H2",
+          "Oxidizing Agent = Substance that supplies O2 or removes H2 (itself gets reduced)",
+          "Brown fumes in heating lead nitrate = Nitrogen dioxide (NO2)",
         ],
       },
       "chemical-reactions-equations": {
@@ -736,22 +1075,49 @@ const CHAPTER_DATABASE: Record<string, Record<string, Record<string, ChapterCont
 
 export function useChapterContentDatabase() {
   const getChapterContent = (board: string, classGrade: string, chapter: string): ChapterContent | null => {
+    if (!chapter) return null;
+
+    const normalize = (str: string) => str.toLowerCase().replace(/[^a-z0-9]/g, "");
+    const targetKey = normalize(chapter);
+
+    // 1. Try exact board & grade
     const boardKey = board.toLowerCase();
-    const boardData = CHAPTER_DATABASE[boardKey];
-    if (!boardData) return null;
+    const boardData = CHAPTER_DATABASE[boardKey] || CHAPTER_DATABASE["cbse"];
+    if (boardData) {
+      const gradeData = boardData[classGrade] || boardData["10th"];
+      if (gradeData) {
+        for (const [dbKey, content] of Object.entries(gradeData)) {
+          const normDbKey = normalize(dbKey);
+          const normContentName = normalize(content.name);
+          if (
+            normDbKey.includes(targetKey) ||
+            targetKey.includes(normDbKey) ||
+            normContentName.includes(targetKey) ||
+            targetKey.includes(normContentName)
+          ) {
+            return content;
+          }
+        }
+      }
+    }
 
-    const gradeData = boardData[classGrade];
-    if (!gradeData) return null;
-
-    // Try exact match first
-    const chapterKey = chapter.toLowerCase().replace(/\s+/g, "-");
-    
-    for (const [dbKey, content] of Object.entries(gradeData)) {
-      if (
-        chapterKey.includes(dbKey.replace(/-/g, "")) ||
-        dbKey.includes(chapterKey.replace(/-/g, ""))
-      ) {
-        return content;
+    // 2. Global search across all database entries if grade match fails
+    for (const bKey of Object.keys(CHAPTER_DATABASE)) {
+      const bObj = CHAPTER_DATABASE[bKey];
+      for (const gKey of Object.keys(bObj)) {
+        const gObj = bObj[gKey];
+        for (const [dbKey, content] of Object.entries(gObj)) {
+          const normDbKey = normalize(dbKey);
+          const normContentName = normalize(content.name);
+          if (
+            normDbKey.includes(targetKey) ||
+            targetKey.includes(normDbKey) ||
+            normContentName.includes(targetKey) ||
+            targetKey.includes(normContentName)
+          ) {
+            return content;
+          }
+        }
       }
     }
 

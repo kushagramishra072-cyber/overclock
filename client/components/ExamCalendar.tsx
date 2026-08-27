@@ -7,9 +7,10 @@ import { getExamUrgency } from "@/lib/calculations";
 interface ExamCalendarProps {
   exams: Exam[];
   onDateClick?: (date: Date) => void;
+  onExamClick?: (exam: Exam) => void;
 }
 
-export function ExamCalendar({ exams, onDateClick }: ExamCalendarProps) {
+export function ExamCalendar({ exams, onDateClick, onExamClick }: ExamCalendarProps) {
   const [currentDate, setCurrentDate] = useState(new Date());
 
   const year = currentDate.getFullYear();
@@ -145,7 +146,9 @@ export function ExamCalendar({ exams, onDateClick }: ExamCalendarProps) {
             <button
               key={day}
               onClick={() => {
-                if (onDateClick) {
+                if (mainExam && onExamClick) {
+                  onExamClick(mainExam);
+                } else if (onDateClick) {
                   onDateClick(new Date(year, month, day));
                 }
               }}

@@ -1,8 +1,11 @@
+import { useState } from "react";
 import HomeButton from "@/components/HomeButton";
+import FeedbackModal from "@/components/FeedbackModal";
 import { Mail, Heart, Zap, Shield } from "lucide-react";
 
 export default function About() {
   const currentYear = new Date().getFullYear();
+  const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-background text-foreground pb-32">
@@ -127,18 +130,24 @@ export default function About() {
             Found a bug? Have an idea for a new feature? We'd love to hear from you!
           </p>
           
-          <a
-            href="mailto:kushagramishra468@gmail.com?subject=Overclock Feedback&body=Hi Kushagra,%0A%0AI have feedback about Overclock:%0A"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl btn-primary hover:shadow-lg transition-all duration-300"
+          <button
+            type="button"
+            onClick={() => setIsFeedbackOpen(true)}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl btn-primary hover:shadow-lg transition-all duration-300 cursor-pointer"
           >
             <Mail className="w-5 h-5" />
             Send Feedback
-          </a>
+          </button>
 
           <p className="text-xs text-muted-foreground mt-4">
             Email: <span className="text-primary font-semibold">kushagramishra468@gmail.com</span>
           </p>
         </div>
+
+        <FeedbackModal
+          isOpen={isFeedbackOpen}
+          onClose={() => setIsFeedbackOpen(false)}
+        />
 
         {/* Footer */}
         <div className="text-center space-y-2 pb-8">
